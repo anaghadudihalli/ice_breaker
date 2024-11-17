@@ -1,8 +1,5 @@
-import os
-
 from dotenv import load_dotenv
-from langchain_openai import ChatOpenAI
-from langchain_community.chat_models.litellm_router import model_extra_key_name
+from langchain_ollama import ChatOllama
 from langchain_core.prompts import PromptTemplate
 
 if __name__ == '__main__':
@@ -21,9 +18,7 @@ In 2004, Musk was an early investor in electric-vehicle manufacturer Tesla Motor
     load_dotenv()
 
     summary_prompt_template = PromptTemplate(input_variables=["information"], template=summary_template)
-
-    llm = ChatOpenAI(temperature=0, model_name="gpt-3.5-turbo")
-
+    llm = ChatOllama(model="llama3")
     chain = summary_prompt_template | llm
     res = chain.invoke(input={"information":information})
 
